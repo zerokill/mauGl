@@ -1,3 +1,6 @@
+app
+*.swp
+
 # Prerequisites
 *.d
 
