@@ -6,18 +6,15 @@
 
 #include "dependencies/include/GL/glew.h"
 #include "dependencies/include/GLFW/glfw3.h"
-
 #include "shader.h"
 #include "util.h"
-
-#define TARGET_FPS 60
+#include "graphics.h"
 
 const unsigned int SCR_WIDTH = 1280;
 const unsigned int SCR_HEIGHT = 720;
 
-// Global variables (replacing soon with State struct)
 bool cursorEntered = false;
-int totalFrames = 0;
+
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -93,78 +90,8 @@ int main()
 
     glPointSize(3.0);
 
-    unsigned int phongShader = createShader("src/shader/baseVertex.glsl", "src/shader/base.glsl");
+//    shadertoy(window, SCR_WIDTH, SCR_HEIGHT);
+//    learnGL(window, SCR_WIDTH, SCR_HEIGHT);
+    learnGL2(window, SCR_WIDTH, SCR_HEIGHT);
 
-    float dt = 0.000001f;
-    float lastFrameTime = (float)glfwGetTime();
-
-    char title[100] = "";
-
-    srand(time(NULL));
-
-    GLfloat quadVertices[] = {
-        -1.0f, -1.0f, 0.0f, // Bottom-left vertex
-        1.0f, -1.0f, 0.0f, // Bottom-right vertex
-        -1.0f, 1.0f, 0.0f, // Top-left vertex
-        1.0f, 1.0f, 0.0f // Top-right vertex
-    };
-
-    GLuint quadVBO, quadVAO;
-    glGenVertexArrays(1, &quadVAO);
-    glGenBuffers(1, &quadVBO);
-
-    glBindVertexArray(quadVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices,
-        GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
-        (void*)0);
-    glEnableVertexAttribArray(0);
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window)) {
-
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-        GLint depthFuncValue;
-        glGetIntegerv(GL_DEPTH_FUNC, &depthFuncValue);
-        glClearDepth(depthFuncValue == GL_LESS ? 1.0f : 0.0f);
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        /* Render here */
-
-        glUseProgram(phongShader);
-
-        glUniform2f(glGetUniformLocation(phongShader, "iResolution"),
-            SCR_WIDTH, SCR_HEIGHT);
-
-        glUniform1f(glGetUniformLocation(phongShader, "iTime"),
-            glfwGetTime());
-
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-        if (totalFrames % 60 == 0) {
-            sprintf(title, "FPS : %-4.0f %s", 1.0 / dt, glGetString(GL_VERSION));
-            glfwSetWindowTitle(window, title);
-        }
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
-        /* Poll for and process events */
-        glfwPollEvents();
-
-        /* Timing */
-        dt = (float)glfwGetTime() - lastFrameTime;
-        while (dt < 1.0f / TARGET_FPS) {
-            dt = (float)glfwGetTime() - lastFrameTime;
-        }
-        lastFrameTime = (float)glfwGetTime();
-        totalFrames++;
-
-    }
-
-    glfwTerminate();
-    return 0;
 }
