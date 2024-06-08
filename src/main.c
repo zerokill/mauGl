@@ -74,24 +74,25 @@ int main()
     /* Initialize GLEW */
     glewInit();
 
-    /* OpenGL Settings */
-    glClearColor(0.1, 0.1, 0.1, 1.0);
-    glClearStencil(0);
+//    /* OpenGL Settings */
+//    glClearColor(0.1, 0.1, 0.1, 1.0);
+//    glClearStencil(0);
+//
+//    glEnable(GL_DEPTH_TEST);
+//    glDepthFunc(GL_LESS);
+//
+//    glEnable(GL_CULL_FACE);
+//    glCullFace(GL_BACK);
+//    glFrontFace(GL_CCW);
+//
+//    glEnable(GL_BLEND);
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//
+//    glPointSize(3.0);
 
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    glPointSize(3.0);
-
-//    shadertoy(window, SCR_WIDTH, SCR_HEIGHT);
+//    simpleShader(window, SCR_WIDTH, SCR_HEIGHT);
+    shadertoy(window, SCR_WIDTH, SCR_HEIGHT);
 //    learnGL(window, SCR_WIDTH, SCR_HEIGHT);
-    learnGL2(window, SCR_WIDTH, SCR_HEIGHT);
+//    learnGL2(window, SCR_WIDTH, SCR_HEIGHT);
 
 }

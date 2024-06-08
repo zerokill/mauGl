@@ -3,11 +3,20 @@
 
 #define TARGET_FPS 60
 
+typedef struct {
+    float x;
+    float y;
+    float z;
+} vec3_t;
+
+typedef struct {
+    vec3_t scale;
+    vec3_t position;
+} scale_pos_t;
+
+int simpleShader(GLFWwindow* window, int width, int height);
 int shadertoy(GLFWwindow* window, int width, int height);
 
-int learnGL(GLFWwindow* window, int width, int height);
-int learnGL2(GLFWwindow* window, int width, int height);
-
-void processInput(GLFWwindow* window);
+void processInput(GLFWwindow* window, scale_pos_t *scale_pos);
 
 #endif
